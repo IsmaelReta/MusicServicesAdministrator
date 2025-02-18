@@ -4,7 +4,6 @@
     {
         public Guid Id { get; set; }
         public required string FullName { get; set; }
-        public List<SongAuthor> SongAuthors { get; } = [];
         public List<Song> Songs { get; } = [];
     }
 }
