@@ -9,7 +9,7 @@ using MusicServicesManager.Data;
 using MusicServicesManager.Models;
 using Newtonsoft.Json;
 
-/*
+
 namespace MusicServicesManager.Controllers
 {
     public class PlatformsController : Controller
@@ -27,7 +27,7 @@ namespace MusicServicesManager.Controllers
                 _httpClient.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage getData = await _httpClient.GetAsync("GetPlatforms");
+                HttpResponseMessage getData = await _httpClient.GetAsync("Platforms");
 
                 if (getData.IsSuccessStatusCode)
                 {
@@ -42,15 +42,40 @@ namespace MusicServicesManager.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        public async Task<IActionResult> CreatePlatform(Platform platformDTO)
+        {
+            using (var _httpClient = new HttpClient())
+            {
+                _httpClient.BaseAddress = new Uri(baseURL + "api/");
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(
+                    new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage getData = await _httpClient.PutAsJsonAsync("",platformDTO);
+
+                if (getData.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("ErrorPage");
+                }
+            }
+        }
         public IActionResult ErrorPage()
         {
             return View();
         }
     }
 }
-*/
 
 
+/*
 namespace MusicServicesManager.Controllers
 {
     public class PlatformsController : Controller
@@ -199,4 +224,4 @@ namespace MusicServicesManager.Controllers
         }
     }
 }
-
+*/
