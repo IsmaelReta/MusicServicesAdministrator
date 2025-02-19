@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicServicesAdministrator", "MusicServicesAdministrator\MusicServicesAdministrator.csproj", "{B9A55041-B8E7-4AD7-A3BB-8F22B1B7591D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicServicesManager", "MusicServicesManager\MusicServicesManager.csproj", "{77029672-D3D9-4E0C-878E-58599D51878F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B9A55041-B8E7-4AD7-A3BB-8F22B1B7591D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9A55041-B8E7-4AD7-A3BB-8F22B1B7591D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9A55041-B8E7-4AD7-A3BB-8F22B1B7591D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77029672-D3D9-4E0C-878E-58599D51878F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77029672-D3D9-4E0C-878E-58599D51878F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77029672-D3D9-4E0C-878E-58599D51878F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77029672-D3D9-4E0C-878E-58599D51878F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

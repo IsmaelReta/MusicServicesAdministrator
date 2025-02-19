@@ -15,7 +15,7 @@ namespace MusicServicesAdministrator.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly AppDbContext _context;
-
+        
         public AuthorsController(AppDbContext context)
         {
             _context = context;
