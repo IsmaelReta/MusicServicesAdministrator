@@ -32,7 +32,7 @@ namespace MusicServicesManager.Controllers
                 if (getData.IsSuccessStatusCode)
                 {
                     string result = getData.Content.ReadAsStringAsync().Result;
-                    lstPlatform = JsonConvert.DeserializeObject<List<Platform>>(result);
+                    lstPlatform = JsonConvert.DeserializeObject<List<Platform>>(result)!;
                 }
                 else
                 {
