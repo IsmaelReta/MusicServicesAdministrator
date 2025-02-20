@@ -39,7 +39,7 @@ namespace MusicServicesManager.Controllers
                     return View("ErrorPage");
                 }
             }
-            return View();
+            return View(lstPlatform);
         }
 
         public async Task<IActionResult> Create()
