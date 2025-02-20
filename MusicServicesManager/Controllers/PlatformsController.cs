@@ -50,12 +50,12 @@ namespace MusicServicesManager.Controllers
         {
             using (var _httpClient = new HttpClient())
             {
-                _httpClient.BaseAddress = new Uri(baseURL + "api/");
+                _httpClient.BaseAddress = new Uri(baseURL + "api/platforms");
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage getData = await _httpClient.PutAsJsonAsync("",platformDTO);
+                HttpResponseMessage getData = await _httpClient.PostAsJsonAsync("", platformDTO);
 
                 if (getData.IsSuccessStatusCode)
                 {
