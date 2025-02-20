@@ -1,45 +1,7 @@
 ﻿@model List<Platform>
-<br/>
-<div class="container p-4 border">
-    <div class="row pb-2">
-        <div class="col">
-            <h1 class="text-primary">
-                Platforms
-            </h1>
-
-        </div>
-        <div class="col text-end p1-1">
-            <a asp-controller="Platforms" asp-action="Create" class="btn-primary">New Student</a>
-        </div>
-
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var item in Model)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>
-                        <a asp-controller="Platforms" asp-action="Detail" asp-route-Id="@item.Id" class="btn btn-primary">Detail</a>
-                        <a asp-controller="Platforms" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-primary">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-</div>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Platforms";
 }
 
 <h1>Index</h1>
@@ -60,8 +22,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
