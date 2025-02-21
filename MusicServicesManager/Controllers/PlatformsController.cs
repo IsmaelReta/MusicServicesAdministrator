@@ -15,11 +15,11 @@ namespace MusicServicesManager.Controllers
     public class PlatformsController : Controller
     {
         // API url
-        private string baseURL = "http://localhost:5293/";
+        private readonly string baseURL = "http://localhost:5293/";
         // GET: Platforms
         public async Task<IActionResult> Index()
         {
-            List<Platform> lstPlatform = new List<Platform>();
+            List<Platform> lstPlatform = [];
             using (var _httpClient = new HttpClient())
             {
                 _httpClient.BaseAddress = new Uri(baseURL + "api/");
@@ -42,14 +42,14 @@ namespace MusicServicesManager.Controllers
             return View(lstPlatform);
         }
 
-        public async Task<IActionResult> Create()
+        public Task<IActionResult> Create()
         {
-            return View();
+            return Task.FromResult<IActionResult>(View());
         }
         public async Task<IActionResult> CreatePlatform(Platform platformDTO)
         {
-            using (var _httpClient = new HttpClient())
-            {
+            using var _httpClient = new HttpClient();
+            
                 _httpClient.BaseAddress = new Uri(baseURL + "api/platforms");
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(
@@ -65,7 +65,8 @@ namespace MusicServicesManager.Controllers
                 {
                     return View("ErrorPage");
                 }
-            }
+            
+            
         }
         public IActionResult ErrorPage()
         {
