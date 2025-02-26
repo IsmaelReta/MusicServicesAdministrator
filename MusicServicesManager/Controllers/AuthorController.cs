@@ -89,6 +89,36 @@ namespace MusicServicesManager.Controllers
 
         }
 
+        public async Task<IActionResult> DetailName(Guid id)
+        {
+            Author AuthorDetails = new();
+
+            using (var _httpClient = new HttpClient())
+            {
+                _httpClient.BaseAddress = new Uri(baseURL + "api/Authors/");
+                _httpClient.DefaultRequestHeaders.Accept.Clear();
+                _httpClient.DefaultRequestHeaders.Accept.Add(
+                    new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage getData = await _httpClient.GetAsync($"{id}");
+
+                if (getData.IsSuccessStatusCode)
+                {
+                    string result = getData.Content.ReadAsStringAsync().Result;
+                    AuthorDetails = JsonConvert.DeserializeObject<Author>(result)!;
+                }
+                else
+                {
+                    return View("ErrorPage");
+                }
+            }
+
+            #pragma warning disable CS8604 
+            return Content(AuthorDetails.FullName);
+            #pragma warning restore CS8604 
+
+        }
+
         public async Task<IActionResult> UpdateAuthor(Guid Id, Author AuthorDTO)
         {
             using var _httpClient = new HttpClient();

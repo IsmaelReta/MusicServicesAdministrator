@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata;
 using MusicServicesManager.Models;
 using Newtonsoft.Json;
 
@@ -7,8 +9,11 @@ namespace MusicServicesManager.Controllers
 {
     public class SongsController : Controller
     {
+        private readonly AuthorsController _authorsController = new();
+
         // API url
         private readonly string baseURL = "http://localhost:5293/";
+
         // GET: Songs
         public async Task<IActionResult> Index()
         {
@@ -24,10 +29,6 @@ namespace MusicServicesManager.Controllers
 
                 if (getData.IsSuccessStatusCode)
                 {
-                    ViewBag.author = new Author()
-                    {
-                        FullName = "TODO: get the name here",
-                    };
                     string result = getData.Content.ReadAsStringAsync().Result;
                     lstSong = JsonConvert.DeserializeObject<List<Song>>(result)!;
                 }
@@ -83,6 +84,10 @@ namespace MusicServicesManager.Controllers
                 {
                     string result = getData.Content.ReadAsStringAsync().Result;
                     SongDetails = JsonConvert.DeserializeObject<Song>(result)!;
+                    ViewBag.author = new Author()
+                    {
+                        FullName = _authorsController.DetailName(id).ToString(),
+                    };
                 }
                 else
                 {
