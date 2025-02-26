@@ -1,0 +1,47 @@
+﻿@model List<Song>
+
+
+@{
+    ViewData["Title"] = "Songs";
+}
+
+<h1>Songs</h1>
+
+<p>
+    <a asp-controller="Songs" asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>GUID</h4>
+            </th>
+            <th>
+                <h4>NAME</h4>
+            </th>
+            <th>
+                <h4>Author</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+             <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+             </td>
+                <td>
+                    @ViewBag.author.FullName
+                </td>
+            <td>
+                    <a asp-controller="Songs" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Songs" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-info">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
