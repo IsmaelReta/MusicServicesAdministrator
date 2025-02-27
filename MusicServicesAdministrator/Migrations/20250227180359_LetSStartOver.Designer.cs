@@ -12,8 +12,8 @@ using MusicServicesAdministrator.Data;
 namespace MusicServicesAdministrator.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250225152409_RelationsUpdate")]
-    partial class RelationsUpdate
+    [Migration("20250227180359_LetSStartOver")]
+    partial class LetSStartOver
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,27 @@ namespace MusicServicesAdministrator.Migrations
                     b.ToTable("Authors");
                 });
 
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.AuthorSong", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SongId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("SongId");
+
+                    b.ToTable("AuthorSongs");
+                });
+
             modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Platform", b =>
                 {
                     b.Property<Guid>("Id")
@@ -83,7 +104,7 @@ namespace MusicServicesAdministrator.Migrations
                     b.Property<Guid>("PlatformId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PlayListId")
+                    b.Property<string>("PlayListPlatformId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -91,6 +112,27 @@ namespace MusicServicesAdministrator.Migrations
                     b.HasIndex("PlatformId");
 
                     b.ToTable("Playlists");
+                });
+
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.PlaylistSong", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlaylistId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SongId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaylistId");
+
+                    b.HasIndex("SongId");
+
+                    b.ToTable("PlaylistSongs");
                 });
 
             modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Song", b =>
@@ -138,6 +180,25 @@ namespace MusicServicesAdministrator.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.AuthorSong", b =>
+                {
+                    b.HasOne("MusicServicesAdministrator.Models.Entities.Author", "Author")
+                        .WithMany("AuthorSongs")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicServicesAdministrator.Models.Entities.Song", "Song")
+                        .WithMany("AuthorSongs")
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Song");
+                });
+
             modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Playlist", b =>
                 {
                     b.HasOne("MusicServicesAdministrator.Models.Entities.Platform", "Platform")
@@ -147,6 +208,25 @@ namespace MusicServicesAdministrator.Migrations
                         .IsRequired();
 
                     b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.PlaylistSong", b =>
+                {
+                    b.HasOne("MusicServicesAdministrator.Models.Entities.Playlist", "Playlist")
+                        .WithMany("PlaylistSongs")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicServicesAdministrator.Models.Entities.Song", "Song")
+                        .WithMany("PlaylistSongs")
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+
+                    b.Navigation("Song");
                 });
 
             modelBuilder.Entity("PlaylistSong", b =>
@@ -162,6 +242,23 @@ namespace MusicServicesAdministrator.Migrations
                         .HasForeignKey("SongsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Author", b =>
+                {
+                    b.Navigation("AuthorSongs");
+                });
+
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Playlist", b =>
+                {
+                    b.Navigation("PlaylistSongs");
+                });
+
+            modelBuilder.Entity("MusicServicesAdministrator.Models.Entities.Song", b =>
+                {
+                    b.Navigation("AuthorSongs");
+
+                    b.Navigation("PlaylistSongs");
                 });
 #pragma warning restore 612, 618
         }

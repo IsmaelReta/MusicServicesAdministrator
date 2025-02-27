@@ -13,5 +13,7 @@ namespace MusicServicesAdministrator.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<Platform> Platforms { get; set; }
+        public DbSet<PlaylistSong> PlaylistSongs { get; set; }
+        public DbSet<AuthorSong> AuthorSongs { get; set; }
     }
 }

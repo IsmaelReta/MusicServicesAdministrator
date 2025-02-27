@@ -7,5 +7,6 @@
         public string? PlayListPlatformId { get; set; }
         public Platform Platform { get; set; } = null!;
         public List<Song> Songs { get; } = [];
+        public List<PlaylistSong> PlaylistSongs { get; } = [];
     }
 }

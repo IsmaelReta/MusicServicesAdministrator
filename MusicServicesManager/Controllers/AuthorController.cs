@@ -100,7 +100,7 @@ namespace MusicServicesManager.Controllers
                 _httpClient.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage getData = await _httpClient.GetAsync($"{id}");
+                HttpResponseMessage getData = await _httpClient.GetAsync($"{id}/name");
 
                 if (getData.IsSuccessStatusCode)
                 {

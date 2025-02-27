@@ -25,20 +25,7 @@ namespace MusicServicesAdministrator.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            // List<string> lstAuthor = [];
             return await _context.Songs.ToListAsync();
-            /*
-            var songs = _context.Songs;
-            foreach (Song d in songs)
-            {
-                _context.Songs.Where(c => c.Id == d.Id).Load();
-                foreach (Author c in d.Authors)
-                {
-                    lstAuthor.Add(d.Name + c.FullName);
-                }
-            }
-            return Ok(songs);
-            */
         }
 
         // GET: api/Songs/5
