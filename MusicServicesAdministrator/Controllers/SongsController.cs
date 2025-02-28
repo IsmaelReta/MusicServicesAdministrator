@@ -25,9 +25,14 @@ namespace MusicServicesAdministrator.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            // return await _context.Songs.ToListAsync()
-            return await _context.Songs.Include(s => s.Authors).ToListAsync();
             // TODO: fix this query.
+            // return await _context.Songs.ToListAsync()
+            // return await _context.Songs.Include(s => s.Authors).ToListAsync();
+            // return await _context.Songs.Include(s => s.Authors.Capacity).ToListAsync();
+            /* return await _context.Songs
+                .FromSql($"select AuthorSong.AuthorsId, Authors.FullName, AuthorSong.SongsId, Songs.Name from AuthorSong JOIN Authors ON Authors.Id = AuthorSong.AuthorsId JOIN Songs ON Songs.Id = AuthorSong.SongsId")
+                .ToListAsync(); */
+            return await _context.Songs.FromSql($"select * from Songs").Include(b => b.Authors).ToListAsync();
         }
 
         // GET: api/Songs/5
