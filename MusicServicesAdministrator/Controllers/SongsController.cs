@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using MusicServicesAdministrator.Data;
 using MusicServicesAdministrator.Models.Entities;
 
@@ -25,15 +28,17 @@ namespace MusicServicesAdministrator.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            // TODO: fix this query.
-            // return await _context.Songs.ToListAsync()
-            // return await _context.Songs.Include(s => s.Authors).ToListAsync();
-            // return await _context.Songs.Include(s => s.Authors.Capacity).ToListAsync();
-            /* return await _context.Songs
-                .FromSql($"select AuthorSong.AuthorsId, Authors.FullName, AuthorSong.SongsId, Songs.Name from AuthorSong JOIN Authors ON Authors.Id = AuthorSong.AuthorsId JOIN Songs ON Songs.Id = AuthorSong.SongsId")
-                .ToListAsync(); */
-            return await _context.Songs.FromSql($"select * from Songs").Include(b => b.Authors).ToListAsync();
-        }
+            var data = await _context.Songs.Include(song => song.Authors).ToListAsync();
+
+            var serializerSettings = new JsonSerializerOptions
+            {
+
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+
+            };
+            return Ok(JsonSerializer.Serialize(data, serializerSettings));
+            //}
+        } 
 
         // GET: api/Songs/5
         [HttpGet("{id}")]

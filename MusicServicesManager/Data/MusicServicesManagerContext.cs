@@ -14,6 +14,9 @@ namespace MusicServicesManager.Data
         {
         }
 
-        public DbSet<MusicServicesManager.Models.Platform> Platform { get; set; } = default!;
+        public DbSet<MusicServicesManager.Models.Platform> Platforms { get; set; } = default!;
+        public DbSet<MusicServicesManager.Models.Playlist> Playlists { get; set; } = default!;
+        public DbSet<MusicServicesManager.Models.Author> Authors { get; set; } = default!;
+        public DbSet<MusicServicesManager.Models.Song> Songs { get; set; } = default!;
     }
 }

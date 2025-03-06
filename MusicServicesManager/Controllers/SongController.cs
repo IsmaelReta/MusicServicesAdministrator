@@ -29,6 +29,7 @@ namespace MusicServicesManager.Controllers
 
                 if (getData.IsSuccessStatusCode)
                 {
+                    //TODO: fix this
                     string result = getData.Content.ReadAsStringAsync().Result;
                     lstSong = JsonConvert.DeserializeObject<List<Song>>(result)!;
                 }
