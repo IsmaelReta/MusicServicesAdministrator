@@ -33,7 +33,7 @@ namespace MusicServicesAdministrator.Controllers
             var serializerSettings = new JsonSerializerOptions
             {
 
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles
 
             };
             return Ok(JsonSerializer.Serialize(data, serializerSettings));
